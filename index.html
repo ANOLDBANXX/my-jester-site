@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>JESTER — Social & Messaging</title>
+  <link rel="icon" type="image/png" href="jester-icon.png">
+  <link rel="apple-touch-icon" href="jester-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" onclick="showSection('home')">
+        <img class="brand-logo" src="jester-icon.png" alt="JESTER logo"><span>JESTER</span>
+      </a>
+
+      <div class="search-box">
+        <span>⌕</span>
+        <input id="globalSearch" type="search" placeholder="Search people, posts or chats...">
+      </div>
+
+      <div class="top-actions">
+        <button class="icon-btn" title="Notifications" onclick="toggleNotifications()">♡<span id="notificationDot" class="dot"></span></button>
+        <button class="avatar small" onclick="showSection('profile')">A</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <button class="nav-item active" data-section="home" onclick="showSection('home')">⌂ <span>Home</span></button>
+        <button class="nav-item" data-section="explore" onclick="showSection('explore')">◈ <span>Explore</span></button>
+        <button class="nav-item" data-section="reels" onclick="showSection('reels')">▶ <span>Reels</span></button>
+        <button class="nav-item" data-section="messages" onclick="showSection('messages')">☏ <span>Messages</span><b id="messageBadge">3</b></button>
+        <button class="nav-item" data-section="contacts" onclick="showSection('contacts')">♧ <span>Contacts</span></button>
+        <button class="nav-item" data-section="profile" onclick="showSection('profile')">◎ <span>Profile</span></button>
+        <button class="nav-item" onclick="openComposer()">＋ <span>Create</span></button>
+
+        <div class="sidebar-bottom">
+          <button class="nav-item" onclick="toggleTheme()">☾ <span>Theme</span></button>
+          <button class="nav-item" onclick="showToast('Settings coming soon')">⚙ <span>Settings</span></button>
+        </div>
+      </aside>
+
+      <section class="content">
+        <!-- HOME -->
+        <section id="home" class="page active">
+          <div class="stories">
+            <div class="story add-story" onclick="openComposer()"><div class="story-ring"><span>+</span></div><small>Your story</small></div>
+            <div class="story"><div class="story-ring"><div class="avatar">M</div></div><small>Maya</small></div>
+            <div class="story"><div class="story-ring"><div class="avatar">J</div></div><small>James</small></div>
+            <div class="story"><div class="story-ring"><div class="avatar">S</div></div><small>Sarah</small></div>
+            <div class="story"><div class="story-ring"><div class="avatar">K</div></div><small>Kevin</small></div>
+            <div class="story"><div class="story-ring"><div class="avatar">L</div></div><small>Lydia</small></div>
+          </div>
+
+          <div class="feed-head">
+            <div><h1>For you</h1><p>Share moments. Stay connected.</p></div>
+            <button class="primary" onclick="openComposer()">＋ Create post</button>
+          </div>
+
+          <div id="feed">
+            <article class="post">
+              <div class="post-head">
+                <div class="user"><div class="avatar">M</div><div><strong>Maya Rose</strong><small>@mayarose · 12m</small></div></div>
+                <button class="more">•••</button>
+              </div>
+              <div class="post-media gradient-one"><div class="media-text">MAKE<br><b>YOUR</b><br>MOMENT</div></div>
+              <div class="post-actions">
+                <button onclick="toggleLike(this)">♡</button><button onclick="focusComment(this)">◯</button><button>↗</button><button class="save">♧</button>
+              </div>
+              <div class="likes"><b class="like-count">248</b> likes</div>
+              <p class="caption"><b>Maya Rose</b> Today is a good day to create something amazing. ✨</p>
+              <button class="comments" onclick="focusComment(this)">View all 31 comments</button>
+              <div class="comment-row"><input placeholder="Add a comment..." onkeydown="handleComment(event, this)"><button onclick="submitComment(this)">Post</button></div>
+            </article>
+
+            <article class="post">
+              <div class="post-head">
+                <div class="user"><div class="avatar blue">J</div><div><strong>James Kato</strong><small>@jamesk · 1h</small></div></div>
+                <button class="more">•••</button>
+              </div>
+              <div class="post-media gradient-two"><div class="media-text">JESTER<br><span>CONNECT</span></div></div>
+              <div class="post-actions">
+                <button onclick="toggleLike(this)">♡</button><button onclick="focusComment(this)">◯</button><button>↗</button><button class="save">♧</button>
+              </div>
+              <div class="likes"><b class="like-count">96</b> likes</div>
+              <p class="caption"><b>James Kato</b> One app. Your people. Your moments. 🚀</p>
+              <button class="comments" onclick="focusComment(this)">View all 12 comments</button>
+              <div class="comment-row"><input placeholder="Add a comment..." onkeydown="handleComment(event, this)"><button onclick="submitComment(this)">Post</button></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- EXPLORE -->
+        <section id="explore" class="page">
+          <div class="section-title"><h1>Explore</h1><p>Discover people, photos and communities.</p></div>
+          <div class="explore-grid">
+            <div class="explore-card gradient-one">Travel</div>
+            <div class="explore-card gradient-two">Music</div>
+            <div class="explore-card gradient-three">Technology</div>
+            <div class="explore-card gradient-four">Fashion</div>
+            <div class="explore-card gradient-five">Business</div>
+            <div class="explore-card gradient-six">Sports</div>
+          </div>
+        </section>
+
+        <!-- REELS -->
+        <section id="reels" class="page">
+          <div class="section-title"><h1>Reels</h1><p>Short videos from your community.</p></div>
+          <div class="reels-grid">
+            <div class="reel gradient-three"><span>▶</span><strong>Creative life</strong></div>
+            <div class="reel gradient-four"><span>▶</span><strong>Weekend vibes</strong></div>
+            <div class="reel gradient-five"><span>▶</span><strong>Build your dream</strong></div>
+          </div>
+        </section>
+
+        <!-- MESSAGES -->
+        <section id="messages" class="page messages-page">
+          <div class="chat-list">
+            <div class="chat-header"><div><h1>Messages</h1><p>Private conversations</p></div><button class="primary" onclick="showToast('New chat')">＋</button></div>
+            <div class="chat-search"><input id="chatSearch" placeholder="Search chats..."></div>
+            <div id="chatUsers">
+              <button class="chat-user active" onclick="selectChat('Maya Rose','M','Hey! Are you free later?')"><div class="avatar">M</div><div><strong>Maya Rose</strong><small>Hey! Are you free later?</small></div><time>10:42</time></button>
+              <button class="chat-user" onclick="selectChat('James Kato','J','The new JESTER design looks great!')"><div class="avatar blue">J</div><div><strong>James Kato</strong><small>The new JESTER design looks great!</small></div><time>09:18</time></button>
+              <button class="chat-user" onclick="selectChat('Sarah A.','S','I sent the photos.')"><div class="avatar pink">S</div><div><strong>Sarah A.</strong><small>I sent the photos.</small></div><time>Yesterday</time></button>
+              <button class="chat-user" onclick="selectChat('Kevin B.','K','Thanks!')"><div class="avatar green">K</div><div><strong>Kevin B.</strong><small>Thanks!</small></div><time>Mon</time></button>
+            </div>
+          </div>
+
+          <div class="chat-window">
+            <div class="chat-top"><div class="user"><div id="chatAvatar" class="avatar">M</div><div><strong id="chatName">Maya Rose</strong><small>● online</small></div></div><div><button>⌕</button><button>⋮</button></div></div>
+            <div id="chatMessages" class="chat-messages">
+              <div class="bubble received">Hey! Are you free later?</div>
+              <div class="bubble sent">Yes 😊 What’s up?</div>
+              <div class="bubble received">I wanted to show you the new JESTER page.</div>
+            </div>
+            <div class="message-tools"><button>＋</button><button>☺</button><input id="messageInput" placeholder="Type a message..." onkeydown="sendOnEnter(event)"><button onclick="sendMessage()">➤</button></div>
+          </div>
+        </section>
+
+        <!-- CONTACTS -->
+        <section id="contacts" class="page">
+          <div class="section-title"><h1>Contacts</h1><p>People you can connect with on JESTER.</p></div>
+          <div class="contacts-grid">
+            <div class="contact"><div class="avatar">M</div><strong>Maya Rose</strong><small>@mayarose</small><button class="primary">Message</button></div>
+            <div class="contact"><div class="avatar blue">J</div><strong>James Kato</strong><small>@jamesk</small><button class="primary">Message</button></div>
+            <div class="contact"><div class="avatar pink">S</div><strong>Sarah A.</strong><small>@sarah_a</small><button class="primary">Message</button></div>
+            <div class="contact"><div class="avatar green">K</div><strong>Kevin B.</strong><small>@kevinb</small><button class="primary">Message</button></div>
+          </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="profile" class="page">
+          <div class="profile-card">
+            <div class="profile-cover"></div>
+            <div class="profile-main">
+              <div class="avatar profile-avatar">A</div>
+              <div class="profile-info"><h1>Your JESTER Profile</h1><p>@yourusername</p><span>Welcome to JESTER — connect, share and chat.</span></div>
+              <button class="outline" onclick="showToast('Profile editor coming soon')">Edit profile</button>
+            </div>
+            <div class="stats"><div><b>0</b><span>Posts</span></div><div><b>0</b><span>Followers</span></div><div><b>0</b><span>Following</span></div></div>
+          </div>
+          <div class="empty-profile"><div>◎</div><h2>Share your first moment</h2><p>Your photos, videos and stories will appear here.</p><button class="primary" onclick="openComposer()">Create post</button></div>
+        </section>
+      </section>
+    </main>
+
+    <nav class="mobile-nav">
+      <button onclick="showSection('home')">⌂<small>Home</small></button>
+      <button onclick="showSection('explore')">◈<small>Explore</small></button>
+      <button onclick="openComposer()">＋<small>Create</small></button>
+      <button onclick="showSection('messages')">☏<small>Chat</small></button>
+      <button onclick="showSection('profile')">◎<small>Profile</small></button>
+    </nav>
+  </div>
+
+  <div id="composer" class="modal">
+    <div class="modal-card">
+      <button class="close" onclick="closeComposer()">×</button>
+      <h2>Create on JESTER</h2>
+      <div class="tabs"><button class="tab active">Post</button><button class="tab">Story</button><button class="tab">Reel</button></div>
+      <textarea id="postText" placeholder="What's happening?"></textarea>
+      <div class="upload-box">📷 Add photo or video<input id="mediaInput" type="file" accept="image/*,video/*"></div>
+      <button class="primary full" onclick="createPost()">Share to JESTER</button>
+    </div>
+  </div>
+
+  <div id="notifications" class="notifications">
+    <h3>Notifications</h3>
+    <p>♡ Maya liked your post.</p><p>♧ James started following you.</p><p>☏ You have 3 new messages.</p>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
